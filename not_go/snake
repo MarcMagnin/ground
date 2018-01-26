@@ -1,0 +1,28 @@
+def new_apple_loc(game_area, apples, snake):
+       ''' Returns an (x, y) tuple if there is a location for a new apple
+       available. Otherwise returns None '''
+   
+       if len(apples) >= game_area.height * game_area.width - len(snake):
+           return None
+   
+       x = random.randrange(0, game_area.width)
+       y = random.randrange(0, game_area.height)
+   
+       position_free = True
+   
+       for apple in apples:
+           if apple[0] == x and apple[1] == y:
+               position_free = False
+   
+       for part in snake:
+           if part[0] == x and part[1] == y:
+               position_free = False
+   
+       if position_free and not game_area.is_out_of_bounds(x, y):
+           apples.append((x, y))
+       else:
+           return new_apple_loc(game_area, apples, snake)
+
+           
+This code snippet is from a snake game.
+There is a logical error here. Which line is wrong, and what should it be instead?
